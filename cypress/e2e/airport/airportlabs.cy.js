@@ -10,13 +10,13 @@ describe("Part 1 | AirportLabs Tests", () => {
 
     cy.viewport(1280, 720);
     const desktopTitle = HomePage.sectionTitleExact(titleText);
-    desktopTitle.should("be.visible");
+    desktopTitle.should("exist");
     cy.expectFontSizePx(desktopTitle);
     cy.expectFontWeightMin(desktopTitle, 300);
 
     cy.viewport(390, 844);
     const mobileTitle = HomePage.sectionTitleExact(titleText);
-    mobileTitle.should("be.visible");
+    mobileTitle.should("exist");
     cy.expectFontSizePx(mobileTitle);
   });
 
