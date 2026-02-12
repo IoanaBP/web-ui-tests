@@ -8,7 +8,7 @@ Cypress E2E automation project using:
 - Negative assertions
 
 ## Cypress Version
-Cypress: 13.6.6 (see'package.json')
+Cypress: 13.6.6 (see 'package.json')
 
 ## Install
 ```bash
