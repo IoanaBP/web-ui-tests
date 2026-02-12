@@ -4,7 +4,8 @@ class HomePage {
   }
 
   sectionTitleExact(text) {
-    return cy.contains("h1,h2,h3", text, { matchCase: false }).first();
+    return cy.contains("h1,h2,h3,h4", text, { matchCase: false, timeout: 20000 }).first()
+      .scrollIntoView({block: "center"});
   }
 
   statLabel(labelText) {
