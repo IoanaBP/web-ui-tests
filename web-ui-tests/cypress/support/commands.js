@@ -1,7 +1,26 @@
-Cypress.Commands.add("clickLinkAndVerifyDomain", (link, domain) => {
-  link.should("have.attr", "href").then($a => {
-    if ($a.attr("target")) $a.removeAttr("target");
+Cypress.Commands.add("clickLinkAndVerifyDomain", (linkChainable, expectedDomain) => {
+  linkChainable
+    .should("be.visible")
+    .and("have.attr", "href")
+    .then(($a) => {
+      if ($a.attr("target")) $a.removeAttr("target");
+    });
+
+  linkChainable.click({ force: true });
+  cy.location("href", { timeout: 20000 }).should("include", expectedDomain);
+});
+
+Cypress.Commands.add("expectFontWeightMin", (chainable, minWeight) => {
+  chainable.invoke("css", "font-weight").then((fw) => {
+    const w = Number(fw) || (fw === "bold" ? 700 : 400);
+    expect(w).to.be.at.least(minWeight);
   });
-  link.click({ force: true });
-  cy.location("href").should("include", domain);
+});
+
+Cypress.Commands.add("expectFontSizePx", (chainable) => {
+  chainable.invoke("css", "font-size").then((fs) => {
+    expect(fs).to.match(/^\d+px$/);
+    const n = Number(fs.replace("px", ""));
+    expect(n).to.be.greaterThan(0);
+  });
 });
