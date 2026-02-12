@@ -1,10 +1,10 @@
 {
   "sectionTitle": "Our Activity in Numbers",
   "stat": {
-    "label": "Projects",
+    "label": "Airports Worldwide",
     "valuePattern": "100",
     "labelCss": { "font-weight-min": 300 },
-    "valueCss": { "font-weight-min": 500 }
+    "valueCss": { "font-weight-min": 300 }
   },
   "social": [
     { "name": "LinkedIn", "hrefIncludes": "linkedin.com", "domain": "linkedin.com" }

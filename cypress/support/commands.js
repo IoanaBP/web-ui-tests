@@ -11,14 +11,25 @@ Cypress.Commands.add("clickLinkAndVerifyDomain", (linkChainable, expectedDomain)
 });
 
 Cypress.Commands.add("expectFontWeightMin", (chainable, minWeight) => {
-  chainable.invoke("css", "font-weight").then((fw) => {
-    const w = Number(fw) || (fw === "bold" ? 700 : 400);
-    expect(w).to.be.at.least(minWeight);
+  chainable.first()
+  .should(($el) => {
+    expect($el.length, "element found").to.be.greaterThan(0);
+
+    const fw = getComputedStyle($el[0]).fontWeight;
+    const normalized = String(fw).trim().toLowerCase();
+
+    const map = { normal: 400, bold: 700, bolder: 700, lighter: 300 };
+
+    const numeric = Number(normalized);
+    const weight = Number.isFinite(numeric) ? numeric : (map[normalized] ?? 400);
+
+    expect(weight, "font-weight").to.be.at.least(minWeight);
   });
 });
 
 Cypress.Commands.add("expectFontSizePx", (chainable) => {
-  chainable.invoke("css", "font-size").then((fs) => {
+  chainable.first()
+  .invoke("css", "font-size").then((fs) => {
     expect(fs).to.match(/^\d+px$/);
     const n = Number(fs.replace("px", ""));
     expect(n).to.be.greaterThan(0);

@@ -4,30 +4,36 @@ class HomePage {
   }
 
   sectionTitleExact(text) {
-    return cy.contains("h1,h2,h3,h4", text, { matchCase: false, timeout: 20000 }).first()
-      .scrollIntoView({block: "center", duration: 500 })
-      .should("exist");
+    return cy.contains("h1,h2,h3,h4", text, { matchCase: false, timeout: 20000 });
   }
 
   statLabel(labelText) {
-    return cy.contains(".elementor-counter-title, [class*='counter-title']", labelText, {
-      matchCase: false,
-    });
-  }
+  this.sectionTitleExact("Our Activity in Numbers")
+    .scrollIntoView({ block: "center", duration: 500 });
+
+  return cy
+    .contains("h4.h4", new RegExp(labelText.replace(/\s+/g, "\\s+"), "i"), { timeout: 20000 })
+    .scrollIntoView({ block: "center", duration: 500 })
+    .should("exist");
+}
 
   statValueNearLabel(labelText) {
-    return this.statLabel(labelText).then(($label) => {
-      const $root = $label.closest(".elementor-counter, section, div");
-      const $value = $root.find(
-        ".elementor-counter-number, .elementor-counter-number-wrapper, [class*='counter-number']"
-      );
-      return cy.wrap($value.first());
-    });
-  }
+  return this.statLabel(labelText).then(($label) => {
+    const $value = $label.prev("h2.h2");
+    return cy.wrap($value);
+  });
+}
 
   socialLinkByDomain(domainFragment) {
-    return cy.get(`a[href*="${domainFragment}"]`).filter(":visible").first();
-  }
+  // scroll to the footer area so icons become visible
+  cy.get(".footer", { timeout: 20000 }).scrollIntoView();
+
+  return cy
+    .get(`.footer a[href*="${domainFragment}"]`, { timeout: 20000 })
+    .first()
+    .scrollIntoView()
+    .should("be.visible");
+}
 
   logo() {
     return cy.get("header img, img[alt*='logo' i], img[src*='logo' i]").first();
