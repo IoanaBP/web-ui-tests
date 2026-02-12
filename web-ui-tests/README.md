@@ -1,6 +1,11 @@
 # Web UI Tests
 
-Cypress E2E automation project.
+Cypress E2E automation project using:
+
+- Page Object Model (POM)
+- Custom Cypress commands
+- Fixture-driven data tests
+- Negative assertions
 
 ## Install
 npm install
@@ -8,9 +13,3 @@ npm install
 ## Run
 npx cypress open
 npx cypress run
-
-## Includes
-- Page Object Model (POM)
-- Custom Cypress command
-- Data-driven test using fixtures
-- Negative test
