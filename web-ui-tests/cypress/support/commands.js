@@ -24,3 +24,12 @@ Cypress.Commands.add("expectFontSizePx", (chainable) => {
     expect(n).to.be.greaterThan(0);
   });
 });
+
+/**
+ * Utility: parse money like "$1,299.99" -> 1299.99
+ */
+Cypress.Commands.add("parseMoney", (txt) => {
+  const cleaned = String(txt || "").replace(/[^0-9.]/g, "");
+  const num = Number(cleaned);
+  return cy.wrap(Number.isFinite(num) ? num : 0);
+});
