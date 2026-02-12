@@ -3,16 +3,36 @@ class HomePage {
     cy.visit("https://airportlabs.com/", { failOnStatusCode: false });
   }
 
-  sectionTitle(text) {
-    return cy.contains("h1, h2, h3", text, { matchCase: false });
+  sectionTitleExact(text) {
+    return cy.contains("h1,h2,h3", text, { matchCase: false }).first();
   }
 
-  socialLink(domain) {
-    return cy.get(`a[href*="${domain}"]`).first();
+  statLabel(labelText) {
+    return cy.contains(".elementor-counter-title, [class*='counter-title']", labelText, {
+      matchCase: false,
+    });
+  }
+
+  statValueNearLabel(labelText) {
+    return this.statLabel(labelText).then(($label) => {
+      const $root = $label.closest(".elementor-counter, section, div");
+      const $value = $root.find(
+        ".elementor-counter-number, .elementor-counter-number-wrapper, [class*='counter-number']"
+      );
+      return cy.wrap($value.first());
+    });
+  }
+
+  socialLinkByDomain(domainFragment) {
+    return cy.get(`a[href*="${domainFragment}"]`).filter(":visible").first();
   }
 
   logo() {
-    return cy.get("img").first();
+    return cy.get("header img, img[alt*='logo' i], img[src*='logo' i]").first();
+  }
+
+  header() {
+    return cy.get("header").first();
   }
 }
 
