@@ -1,3 +1,4 @@
 [
-  { "label": "Projects", "valuePattern": "100" }
+  { "label": "Projects", "valuePattern": "100" },
+  { "label": "Airports", "valuePattern": "50" },
 ]
