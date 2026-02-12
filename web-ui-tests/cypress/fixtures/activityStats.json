@@ -1,4 +1,12 @@
-[
-  { "label": "Projects", "valuePattern": "100" },
-  { "label": "Airports", "valuePattern": "50" },
-]
+{
+  "sectionTitle": "Our Activity in Numbers",
+  "stat": {
+    "label": "Projects",
+    "valuePattern": "100",
+    "labelCss": { "font-weight-min": 300 },
+    "valueCss": { "font-weight-min": 500 }
+  },
+  "social": [
+    { "name": "LinkedIn", "hrefIncludes": "linkedin.com", "domain": "linkedin.com" }
+  ]
+}
