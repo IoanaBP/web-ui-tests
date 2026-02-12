@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "test": "cypress run"
   },
   "devDependencies": {
     "cypress": "^13.6.6"
